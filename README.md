@@ -1,4 +1,4 @@
-# Fork of Stripe [https://github.com/stripe/jquery.payment]jQuery.payment 
+# Fork of Stripe [jQuery.payment](https://github.com/stripe/jquery.payment)
 
 A general purpose library for building credit card forms, validating inputs and formatting numbers.
 
