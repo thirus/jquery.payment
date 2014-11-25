@@ -6,7 +6,11 @@ $.fn.payment = (method, args...) ->
 
 # Utils
 
+# default constants
 defaultFormat = /(\d{1,4})/g
+dinersClubFormat = /(\d{1,4})(\d{1,6})?(\d{1,4})?/
+amexFormat = /(\d{1,4})(\d{1,6})?(\d{1,5})?/
+maxYear = 10
 
 cards = [
   # Debit cards must come first, since they have more
@@ -63,15 +67,15 @@ cards = [
   {
       type: 'amex'
       pattern: /^3[47]/
-      format: /(\d{1,4})(\d{1,6})?(\d{1,5})?/
+      format: amexFormat
       length: [15]
-      cvcLength: [3..4]
+      cvcLength: [4]
       luhn: true
   }
   {
       type: 'dinersclub'
       pattern: /^3[0689]/
-      format: defaultFormat
+      format: dinersClubFormat
       length: [14]
       cvcLength: [3]
       luhn: true
@@ -162,11 +166,7 @@ formatCardNumber = (e) ->
   return if $target.prop('selectionStart')? and
     $target.prop('selectionStart') isnt value.length
 
-  if card && card.type is 'amex'
-    # AMEX cards are formatted differently
-    re = /^(\d{4}|\d{4}\s\d{6})$/
-  else
-    re = /(?:^|\s)(\d{4})$/
+  re = card.format
 
   # If '4242' + 4
   if re.test(value)
@@ -424,6 +424,7 @@ $.payment.validateCardExpiry = (month, year) ->
 
   expiry      = new Date(year, month)
   currentTime = new Date
+  maxTime = new Date(currentTime.getFullYear() + maxYear, currentTime.getMonth())
 
   # Months start from 0 in JavaScript
   expiry.setMonth(expiry.getMonth() - 1)
@@ -433,7 +434,7 @@ $.payment.validateCardExpiry = (month, year) ->
   # of the month after
   expiry.setMonth(expiry.getMonth() + 1, 1)
 
-  expiry > currentTime
+  expiry > currentTime and expiry <= maxTime
 
 $.payment.validateCardCVC = (cvc, type) ->
   cvc = $.trim(cvc)
