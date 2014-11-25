@@ -1,7 +1,7 @@
 {
-  "name": "payment",
-  "version": "1.1.4",
-  "title": "jQuery.payment",
+  "name": "js-payment",
+  "version": "1.1.5",
+  "title": "jQuery.js-payment",
   "description": "A general purpose library for building credit card forms, validating inputs and formatting numbers.",
   "keywords": [
     "payment",
@@ -9,9 +9,9 @@
     "card"
   ],
   "author": {
-    "name": "Stripe",
-    "url": "https://www.stripe.com",
-    "email": "support+github@stripe.com"
+    "name": "thirus",
+    "url": "https://github.com/thirus/jquery.payment",
+    "email": ""
   },
   "licenses": [
     {
@@ -19,7 +19,7 @@
       "url": "https://github.com/stripe/jquery.payment/blob/master/LICENSE"
     }
   ],
-  "homepage": "https://github.com/stripe/jquery.payment",
+  "homepage": "https://github.com/thirus/jquery.payment",
   "docs": "https://github.com/stripe/jquery.payment",
   "bugs": "https://github.com/stripe/jquery.payment/issues",
   "demo": "http://stripe.github.io/jquery.payment/example",
