@@ -1,12 +1,12 @@
-{spawn} = require 'child_process'
+{exec} = require 'child_process'
 path    = require 'path'
 
 binPath = (bin) -> path.resolve(__dirname, "./node_modules/.bin/#{bin}")
 
 runExternal = (cmd, args) ->
-  child = spawn(binPath(cmd), args, stdio: 'inherit')
-  child.on('error', console.error)
-  child.on('close', process.exit)
+  child = exec binPath(cmd) + " " + args.join(' '), (err, stdout, stderr) ->
+        throw err if err
+        console.log stdout + stderr
 
 task 'build', 'Build lib/ from src/', ->
   runExternal 'coffee', ['-c', '-o', 'lib', 'src']
