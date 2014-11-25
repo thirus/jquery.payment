@@ -104,6 +104,14 @@ cards = [
       cvcLength: [3]
       luhn: true
   }
+  {
+      type: 'uatp'
+      pattern: /^1/
+      format: defaultFormat
+      length: [16]
+      cvcLength: [3]
+      luhn: true
+  }
 ]
 
 cardFromNumber = (num) ->
@@ -374,6 +382,23 @@ $.payment.fn.restrictNumeric = ->
 
 $.payment.fn.cardExpiryVal = ->
   $.payment.cardExpiryVal($(this).val())
+
+# Expose cards to add custom card types
+$.payment.getCardData = (type) ->
+  return null unless type
+  card = cardFromType(type)
+  if card?
+    return card
+  else
+    return null
+
+$.payment.addCard = (cardData) ->
+  return false unless cardData
+  card = cardFromType(cardData.type)
+  if not card?
+    cards.push(cardData)
+    return true
+  return false
 
 $.payment.cardExpiryVal = (value) ->
   value = value.replace(/\s/g, '')
