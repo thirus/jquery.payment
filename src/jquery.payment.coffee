@@ -109,7 +109,7 @@ cards = [
       type: 'uatp'
       pattern: /^1/
       format: uatpFormat
-      length: [16]
+      length: [15]
       cvcLength: [3]
       luhn: true
   }
@@ -175,7 +175,15 @@ formatCardNumber = (e) ->
   return if $target.prop('selectionStart')? and
     $target.prop('selectionStart') isnt value.length
 
-  re = card.format
+  if card and card.type is 'amex'
+    # AMEX cards are formatted differently
+    re = /^(\d{4}|\d{6}\s\d{5})$/
+  else if card and card.type is 'uatp'
+    re = /^(\d{4}|\d{6}\s\d{5})$/
+  else if card and card.type is 'dinersclub'
+    re = /^(\d{4}|\d{6}\s\d{4})$/
+  else
+    re = /(?:^|\s)(\d{4})$/
 
   # If '4242' + 4
   if re.test(value)
