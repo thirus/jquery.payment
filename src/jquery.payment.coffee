@@ -10,6 +10,7 @@ $.fn.payment = (method, args...) ->
 defaultFormat = /(\d{1,4})/g
 dinersClubFormat = /(\d{1,4})(\d{1,6})?(\d{1,4})?/
 amexFormat = /(\d{1,4})(\d{1,6})?(\d{1,5})?/
+uatpFormat = /(\d{1,4})(\d{1,6})?(\d{1,5})?/
 maxYear = 10
 
 cards = [
@@ -107,7 +108,7 @@ cards = [
   {
       type: 'uatp'
       pattern: /^1/
-      format: defaultFormat
+      format: uatpFormat
       length: [16]
       cvcLength: [3]
       luhn: true
