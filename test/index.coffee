@@ -83,6 +83,10 @@ describe 'jquery.payment', ->
       assert($.payment.validateCardNumber('3530111333300000'), 'jcb')
       assert($.payment.validateCardNumber('3566002020360505'), 'jcb')
 
+      assert($.payment.validateCardNumber('183212121222228'), 'uatp')
+      assert($.payment.validateCardNumber('183212121555551'), 'uatp')
+      assert($.payment.validateCardNumber('183212121666663'), 'uatp')
+
   describe 'Validating a CVC', ->
     it 'should fail if is empty', ->
       topic = $.payment.validateCardCVC ''
@@ -168,9 +172,9 @@ describe 'jquery.payment', ->
       topic = $.payment.validateCardCVC('123')
       assert.equal topic, true
 
-    it 'should validate a three digit number with card type amex', ->
+    it 'should not validate a three digit number with card type amex', ->
       topic = $.payment.validateCardCVC('123', 'amex')
-      assert.equal topic, true
+      assert.equal topic, false
 
     it 'should validate a three digit number with card type other than amex', ->
       topic = $.payment.validateCardCVC('123', 'visa')
@@ -259,6 +263,9 @@ describe 'jquery.payment', ->
 
       assert.equal($.payment.cardType('3530111333300000'), 'jcb')
       assert.equal($.payment.cardType('3566002020360505'), 'jcb')
+
+      assert.equal($.payment.cardType('183212121222228'), 'uatp')
+      assert.equal($.payment.cardType('183212121555551'), 'uatp')
 
   describe 'formatCardNumber', ->
     it 'should format cc number correctly', (done) ->

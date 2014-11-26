@@ -5,7 +5,7 @@ binPath = (bin) -> path.resolve(__dirname, "./node_modules/.bin/#{bin}")
 
 runExternal = (cmd, args) ->
   child = exec binPath(cmd) + " " + args.join(' '), (err, stdout, stderr) ->
-        throw err if err
+        #throw err if err
         console.log stdout + stderr
 
 task 'build', 'Build lib/ from src/', ->
