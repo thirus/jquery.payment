@@ -16,14 +16,14 @@ maxYear = 10
 cards = [
   # Debit cards must come first, since they have more
   # specific patterns than their credit-card equivalents.
-  {
-      type: 'visaelectron'
-      pattern: /^4(026|17500|405|508|844|91[37])/
-      format: defaultFormat
-      length: [16]
-      cvcLength: [3]
-      luhn: true
-  }
+  #{
+  #    type: 'visaelectron'
+  #    pattern: /^4(026|17500|405|508|844|91[37])/
+  #    format: defaultFormat
+  #    length: [16]
+  #    cvcLength: [3]
+  #    luhn: true
+  #}
   {
       type: 'maestro'
       pattern: /^(5(018|0[23]|[68])|6(39|7))/
