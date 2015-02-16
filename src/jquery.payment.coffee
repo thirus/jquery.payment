@@ -405,7 +405,7 @@ $.payment.addCard = (cardData) ->
   return false unless cardData
   card = cardFromType(cardData.type)
   if not card?
-    cards.push(cardData)
+    cards.unshift(cardData)
     return true
   return false
 
